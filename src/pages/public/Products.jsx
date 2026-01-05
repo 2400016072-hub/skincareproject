@@ -1,27 +1,78 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import dummyProducts from "../../data/dummyProducts";
 import ProductCard from "../../components/public/ProductCard";
-import Navbar from "../../components/public/Navbar";
+
+const categories = [
+  { label: "Facial Wash", value: "facial-wash" },
+  { label: "Serum", value: "serum" },
+  { label: "Moisturizer", value: "moisturizer" },
+  { label: "Sunscreen", value: "sunscreen" },
+];
 
 export default function Products() {
   const [searchParams] = useSearchParams();
+  const category = searchParams.get("category");
   const brand = searchParams.get("brand");
 
-  const filteredProducts = brand
-    ? dummyProducts.filter(
-        (product) => product.brand === brand
-      )
-    : dummyProducts;
+  let filteredProducts = dummyProducts;
+
+  if (category) {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.category === category
+    );
+  }
+
+  if (brand) {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.brand === brand
+    );
+  }
 
   return (
-    <>
-      <Navbar />
+    <div className="min-h-screen px-8 py-10 bg-gradient-to-b from-pink-50 via-white to-pink-50">
+    
+      <div className="max-w-7xl mx-auto bg-white rounded-3xl shadow-sm p-8">
+        
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          Produk Skincare
+        </h2>
 
-      <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        <div className="flex gap-3 mb-10 flex-wrap justify-center">
+          {categories.map((cat) => (
+            <Link
+              key={cat.value}
+              to={`/products?category=${cat.value}`}
+              className={`
+                px-5 py-2 rounded-full text-sm font-medium
+                transition-all duration-300
+                ${
+                  category === cat.value
+                    ? "bg-pink-500 text-white shadow-lg scale-105"
+                    : "bg-pink-100 text-pink-600 hover:bg-pink-200 hover:scale-105"
+                }
+              `}
+            >
+              {cat.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+              />
+            ))
+          ) : (
+            <p className="text-center col-span-full text-gray-500">
+              Produk tidak ditemukan
+            </p>
+          )}
+        </div>
+
       </div>
-    </>
+    </div>
   );
 }
