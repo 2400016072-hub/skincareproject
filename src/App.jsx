@@ -1,17 +1,21 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminCreate from "./pages/admin/AdminCreate";
-import AdminEdit from "./pages/admin/AdminEdit";
+import { Routes, Route } from "react-router-dom";
+import Layout from "./layout/Layout";
+import Home from "./pages/public/Home";
+import Products from "./pages/public/Products";
+import Contact from "./pages/public/Contact";
+import DetailProduct from "./pages/public/DetailProduct";
 
-export default function App() {
+function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/admin" />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/create" element={<AdminCreate />} />
-        <Route path="/admin/edit/:id" element={<AdminEdit />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<DetailProduct />} />
+        <Route path="/contact" element={<Contact />} />
+      </Route>
+    </Routes>
   );
 }
+
+export default App;
