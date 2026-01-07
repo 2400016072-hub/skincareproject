@@ -29,7 +29,7 @@ export default function Products() {
   }
 
   return (
-    <div className="min-h-screen px-8 py-10 bg-gradient-to-b from-pink-50 via-white to-pink-50">
+    <div className="px-8 py-12">
     
       <div className="max-w-7xl mx-auto bg-white rounded-3xl shadow-sm p-8">
         

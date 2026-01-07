@@ -26,11 +26,10 @@ export default function DetailProduct() {
   };
 
   return (
-    <div className="min-h-screen px-8 py-12 bg-pink-50">
+    <div className="px-8 py-12">
       <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow p-10">
         <div className="flex flex-col md:flex-row gap-12 items-center">
 
-          {/* IMAGE */}
           <img
             src={product.image}
             alt={product.name}
@@ -39,7 +38,6 @@ export default function DetailProduct() {
             `}
           />
 
-          {/* CONTENT */}
           <div>
             <h1 className="text-3xl font-bold">{product.name}</h1>
             <p className="text-2xl text-pink-600 mt-2">
@@ -49,10 +47,8 @@ export default function DetailProduct() {
               {product.description}
             </p>
 
-            {/* ACTION */}
             <div className="flex gap-4 mt-6 flex-wrap">
 
-              {/* ADD TO CART */}
               <button
                 onClick={handleAddToCart}
                 className={`
@@ -66,7 +62,6 @@ export default function DetailProduct() {
                 {added ? "✓ Ditambahkan" : "+ Keranjang"}
               </button>
 
-              {/* BUY VIA WA */}
               <a
                 href={`https://wa.me/6285728472918?text=Halo,%20saya%20ingin%20membeli%20${product.name}`}
                 target="_blank"

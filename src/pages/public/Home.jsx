@@ -5,11 +5,7 @@ import SkintificLogo from "../../assets/brands/Skintific.png";
 
 export default function Home() {
   return (
-    <div className="
-      min-h-screen
-      bg-gradient-to-br from-pink-50 via-rose-50 to-white
-      px-8 py-12
-    ">
+    <div className="px-8 py-12">
 
       <h1 className="
         text-4xl md:text-5xl

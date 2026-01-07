@@ -1,7 +1,6 @@
 const Contact = () => {
   return (
-    <div className="min-h-screen px-8 py-12 bg-gradient-to-b from-pink-50 via-white to-pink-100">
-      
+    <div className="px-8 py-12">
       <div className="max-w-xl mx-auto bg-white rounded-3xl shadow-md p-8 relative overflow-hidden">
         
         <div className="absolute -top-12 -left-12 w-32 h-32 bg-pink-100 rounded-full opacity-50"></div>

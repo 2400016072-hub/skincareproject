@@ -12,7 +12,6 @@ const Navbar = () => {
     0
   );
 
-  // 🔥 ANIMASI STATE
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
@@ -24,9 +23,8 @@ const Navbar = () => {
   }, [totalItem]);
 
   return (
-    <nav className="flex justify-between items-center px-8 py-4 border-b relative">
+    <nav className="flex justify-between items-center px-8 py-4 bg-white border-b border-gray-100 sticky top-0 z-50">
       
-      {/* LOGO */}
       <Link to="/" className="flex items-center">
         <img
           src={Logo}
@@ -35,12 +33,10 @@ const Navbar = () => {
         />
       </Link>
 
-      {/* MENU */}
       <div className="flex gap-6 items-center">
 
         <Link to="/" className="hover:text-pink-500">Home</Link>
 
-        {/* PRODUCTS */}
         <div className="relative">
           <button
             onClick={() => setOpen(!open)}
@@ -72,7 +68,6 @@ const Navbar = () => {
 
         <Link to="/contact" className="hover:text-pink-500">Contact</Link>
 
-        {/* 🛒 CART */}
         <Link to="/cart" className="relative text-2xl">
           🛒
           {totalItem > 0 && (

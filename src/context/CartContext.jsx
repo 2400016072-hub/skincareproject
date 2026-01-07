@@ -25,7 +25,6 @@ export const CartProvider = ({ children }) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // 🔥 TAMBAHAN
   const clearCart = () => {
     setCart([]);
   };

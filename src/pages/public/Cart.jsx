@@ -20,14 +20,13 @@ export default function Cart() {
   );
 
   return (
-    <div className="min-h-screen px-6 py-10 bg-gradient-to-b from-pink-50 via-white to-pink-100">
+    <div className="px-8 py-12">
       <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-lg p-8">
 
         <h2 className="text-3xl font-bold text-pink-600 mb-6 text-center">
           Keranjang Belanja 🛒
         </h2>
 
-        {/* EMPTY STATE */}
         {cart.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-6xl mb-4">🛍️</p>
@@ -37,7 +36,7 @@ export default function Cart() {
           </div>
         ) : (
           <>
-            {/* ITEM LIST */}
+ 
             <div className="space-y-6">
               {cart.map((item) => (
                 <div
@@ -84,7 +83,6 @@ export default function Cart() {
               ))}
             </div>
 
-            {/* SUMMARY */}
             <div className="mt-10 border-t pt-6">
               <div className="flex justify-between text-xl font-semibold">
                 <span>Total</span>
