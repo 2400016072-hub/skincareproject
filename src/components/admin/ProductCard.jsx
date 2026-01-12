@@ -1,23 +1,31 @@
 export default function ProductCard({ product, onEdit, onDelete }) {
   return (
-    <div className="bg-white rounded-xl shadow p-4 hover:shadow-lg">
-      <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded">
+    <div
+      className="bg-white rounded-2xl p-5 border border-pink-200 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-pink-400"
+    >
+      <span className="inline-block mb-2 px-3 py-1 text-xs rounded-full bg-pink-100 text-pink-600">
         {product.category}
       </span>
 
-      <h3 className="font-semibold text-lg mt-2">{product.name}</h3>
-      <p className="text-gray-600">Rp {product.price}</p>
+      <h3 className="font-semibold text-pink-700 text-lg">
+        {product.name}
+      </h3>
 
-      <div className="flex gap-2 mt-4">
+      <p className="text-pink-500 mb-4">
+        Rp {product.price}
+      </p>
+
+      <div className="flex gap-2">
         <button
           onClick={onEdit}
-          className="flex-1 bg-yellow-400 text-white rounded py-1"
+          className="flex-1 bg-pink-400 hover:bg-pink-500 text-white rounded-lg py-2 transition"
         >
           Edit
         </button>
+
         <button
           onClick={onDelete}
-          className="flex-1 bg-red-500 text-white rounded py-1"
+          className="flex-1 bg-pink-600 hover:bg-pink-700 text-white rounded-lg py-2 transition"
         >
           Hapus
         </button>

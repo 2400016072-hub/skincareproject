@@ -1,13 +1,18 @@
-import { Link } from "react-router-dom";
-
 export default function AdminNavbar() {
   return (
-    <nav className="bg-blue-600 text-white px-6 py-4 flex justify-between">
-      <h1 className="font-bold text-xl">Glow S-Class Admin</h1>
-      <div className="space-x-4">
-        <Link to="/admin">Dashboard</Link>
-        <Link to="/admin/create">Tambah Produk</Link>
+    <div className="bg-pink-500 text-white px-6 py-4 flex justify-between items-center">
+      <h1 className="font-bold text-lg">
+        Glow S-Class Admin
+      </h1>
+
+      <div className="flex gap-4">
+        <a className="hover:text-pink-200 cursor-pointer">
+          Dashboard
+        </a>
+        <a className="hover:text-pink-200 cursor-pointer">
+          Tambah Produk
+        </a>
       </div>
-    </nav>
+    </div>
   );
 }
