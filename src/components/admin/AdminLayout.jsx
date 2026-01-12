@@ -4,11 +4,12 @@ export default function AdminLayout({ children }) {
   return (
     <>
       <AdminNavbar />
-      <div className="min-h-screen bg-gray-100 p-6">
-        <div className="bg-white p-6 rounded-lg shadow">
-          {children}
-        </div>
-      </div>
+<div className="min-h-screen bg-pink-50 p-6">
+  <div className="bg-white/80 p-6 rounded-2xl shadow">
+    {children}
+  </div>
+</div>
+
     </>
   );
 }
