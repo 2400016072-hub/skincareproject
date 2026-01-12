@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Logo from "../../assets/brands/Logo.png";
 import { useCart } from "../../context/CartContext";
@@ -6,6 +6,7 @@ import { useCart } from "../../context/CartContext";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { cart } = useCart();
+  const navigate = useNavigate();
 
   const totalItem = (cart || []).reduce(
     (total, item) => total + item.qty,
@@ -22,6 +23,12 @@ const Navbar = () => {
     }
   }, [totalItem]);
 
+  // ✅ LOGOUT
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
   return (
     <nav className="flex justify-between items-center px-8 py-4 bg-white border-b border-gray-100 sticky top-0 z-50">
       
@@ -37,6 +44,7 @@ const Navbar = () => {
 
         <Link to="/" className="hover:text-pink-500">Home</Link>
 
+        {/* PRODUCTS */}
         <div className="relative">
           <button
             onClick={() => setOpen(!open)}
@@ -68,6 +76,7 @@ const Navbar = () => {
 
         <Link to="/contact" className="hover:text-pink-500">Contact</Link>
 
+        {/* CART */}
         <Link to="/cart" className="relative text-2xl">
           🛒
           {totalItem > 0 && (
@@ -84,6 +93,14 @@ const Navbar = () => {
             </span>
           )}
         </Link>
+
+        {/* LOGOUT */}
+        <button
+          onClick={handleLogout}
+          className="text-red-500 hover:underline text-sm"
+        >
+          Logout
+        </button>
       </div>
     </nav>
   );

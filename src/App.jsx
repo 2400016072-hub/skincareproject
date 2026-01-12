@@ -10,6 +10,8 @@ import Contact from "./pages/public/Contact";
 import DetailProduct from "./pages/public/DetailProduct";
 import Cart from "./pages/public/Cart";
 
+import LoginForm from "./pages/auth/Login";
+
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminCreate from "./pages/admin/AdminCreate";
 import AdminEdit from "./pages/admin/AdminEdit";
@@ -23,7 +25,15 @@ function App() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         
-        {/* PUBLIC ROUTES */}
+        <Route
+          path="/login"
+          element={
+            <PageTransition>
+              <LoginForm />
+            </PageTransition>
+          }
+        />
+
         <Route element={<Layout />}>
           <Route
             path="/"
@@ -70,7 +80,6 @@ function App() {
             }
           />
 
-          {/* 404 PUBLIC */}
           <Route
             path="*"
             element={
@@ -81,12 +90,10 @@ function App() {
           />
         </Route>
 
-        {/* ADMIN ROUTES (NO ANIMATION) */}
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/create" element={<AdminCreate />} />
         <Route path="/admin/edit/:id" element={<AdminEdit />} />
 
-        {/* GLOBAL 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
