@@ -11,6 +11,7 @@ export default function EditModal({ isOpen, product, onClose, onSave }) {
       name: formData.get("name"),
       category: formData.get("category"),
       price: Number(formData.get("price")),
+      stock: Number(formData.get("stock")), // 🔥 TAMBAHAN
     });
   };
 
@@ -41,6 +42,15 @@ export default function EditModal({ isOpen, product, onClose, onSave }) {
             name="price"
             type="number"
             defaultValue={product.price}
+            className="w-full border p-2 rounded"
+            required
+          />
+
+          {/* ✅ INPUT STOK */}
+          <input
+            name="stock"
+            type="number"
+            defaultValue={product.stock}
             className="w-full border p-2 rounded"
             required
           />
