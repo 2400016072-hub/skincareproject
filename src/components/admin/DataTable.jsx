@@ -1,15 +1,14 @@
 import { useState } from "react";
 import EditModal from "./EditModal";
+import useProduct from "../../hooks/useProduct";
 
-export default function DataTable({ products, setProducts }) {
+export default function DataTable() {
+  const { products, updateProduct } = useProduct();
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const handleSave = (updatedProduct) => {
-    setProducts((prev) =>
-      prev.map((p) =>
-        p.id === updatedProduct.id ? updatedProduct : p
-      )
-    );
+  const handleSave = async (updatedProduct) => {
+    await updateProduct(updatedProduct.id, updatedProduct);
+    setSelectedProduct(null);
   };
 
   return (
@@ -41,10 +40,7 @@ export default function DataTable({ products, setProducts }) {
         isOpen={!!selectedProduct}
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
-        onSave={(data) => {
-          handleSave(data);
-          setSelectedProduct(null);
-        }}
+        onSave={handleSave}
       />
     </>
   );

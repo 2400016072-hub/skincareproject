@@ -1,9 +1,9 @@
 import { useSearchParams, Link } from "react-router-dom";
-import dummyProducts from "../../data/dummyProducts";
+import useProduct from "../../hooks/useProduct";
 import ProductCard from "../../components/public/ProductCard";
 
 const categories = [
-  { label: "Facial Wash", value: "facial-wash" },
+  { label: "Facial Wash", value: "facial wash" },
   { label: "Serum", value: "serum" },
   { label: "Moisturizer", value: "moisturizer" },
   { label: "Sunscreen", value: "sunscreen" },
@@ -12,9 +12,10 @@ const categories = [
 export default function Products() {
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
-  const brand = searchParams.get("brand");
 
-  let filteredProducts = dummyProducts;
+  const { products, loading, error } = useProduct();
+
+  let filteredProducts = products;
 
   if (category) {
     filteredProducts = filteredProducts.filter(
@@ -22,20 +23,13 @@ export default function Products() {
     );
   }
 
-  if (brand) {
-    filteredProducts = filteredProducts.filter(
-      (product) => product.brand === brand
-    );
-  }
+  if (loading) return <p className="text-center">Loading produk...</p>;
+  if (error) return <p className="text-center">{error}</p>;
 
   return (
     <div className="px-8 py-12">
-    
       <div className="max-w-7xl mx-auto bg-white rounded-3xl shadow-sm p-8">
-        
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          Produk Skincare
-        </h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Produk Skincare</h2>
 
         <div className="flex gap-3 mb-10 flex-wrap justify-center">
           {categories.map((cat) => (
@@ -60,10 +54,7 @@ export default function Products() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
+              <ProductCard key={product.id} product={product} />
             ))
           ) : (
             <p className="text-center col-span-full text-gray-500">
@@ -71,7 +62,6 @@ export default function Products() {
             </p>
           )}
         </div>
-
       </div>
     </div>
   );
