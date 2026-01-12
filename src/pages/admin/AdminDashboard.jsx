@@ -13,7 +13,7 @@ export default function AdminDashboard() {
   const [selected, setSelected] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
 
-  // 🔹 GET ALL PRODUCTS
+ 
   const fetchProducts = async () => {
     try {
       const res = await fetch(API_URL);
@@ -28,7 +28,6 @@ export default function AdminDashboard() {
     fetchProducts();
   }, []);
 
-  // 🔹 UPDATE PRODUCT (EDIT)
   const handleSave = async (updatedData) => {
     try {
       await fetch(`${API_URL}/${selected.id}`, {
@@ -44,7 +43,7 @@ export default function AdminDashboard() {
     }
   };
 
-  // 🔹 ADD PRODUCT
+  
   const handleAdd = async (newData) => {
     try {
       await fetch(API_URL, {
@@ -65,7 +64,7 @@ export default function AdminDashboard() {
     }
   };
 
-  // 🔹 DELETE (SOFT DELETE)
+  
   const handleDelete = async (product) => {
     try {
       await fetch(`${API_URL}/${product.id}`, {
@@ -83,7 +82,7 @@ export default function AdminDashboard() {
     }
   };
 
-  // 🔹 RESTORE PRODUCT
+  
   const handleRestore = async (product) => {
     try {
       await fetch(`${API_URL}/${product.id}`, {
@@ -101,7 +100,7 @@ export default function AdminDashboard() {
     }
   };
 
-  // 🔹 UPDATE STOCK (+ / -)
+  
   const handleUpdateStock = async (product, newStock) => {
     try {
       await fetch(`${API_URL}/${product.id}`, {
@@ -131,7 +130,6 @@ export default function AdminDashboard() {
         + Tambah Produk
       </button>
 
-      {/* PRODUK AKTIF */}
       <h2 className="text-xl font-semibold mb-4">Produk Aktif</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
@@ -148,7 +146,6 @@ export default function AdminDashboard() {
           ))}
       </div>
 
-      {/* PRODUK TERHAPUS */}
       <h2 className="text-xl font-semibold mb-4">Produk Terhapus</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -169,7 +166,7 @@ export default function AdminDashboard() {
           ))}
       </div>
 
-      {/* MODAL EDIT */}
+
       <AdminModal
         show={!!selected}
         title="Edit Produk"
@@ -178,7 +175,6 @@ export default function AdminDashboard() {
         {selected && <FormData defaultValue={selected} onSave={handleSave} />}
       </AdminModal>
 
-      {/* MODAL ADD */}
       <AdminModal
         show={isAdd}
         title="Tambah Produk"
