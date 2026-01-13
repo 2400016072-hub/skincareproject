@@ -16,7 +16,7 @@ export default function LoginForm() {
     );
 
     if (!foundUser) {
-      alert("Username atau password salah ❌");
+      alert("Username atau password salah");
       return;
     }
 

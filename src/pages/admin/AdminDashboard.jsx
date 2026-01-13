@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import AdminLayout from "../../components/admin/AdminLayout";
-import AdminHeader from "../../components/admin/AdminHeader";
 import ProductCard from "../../components/admin/ProductCard";
 import AdminModal from "../../components/admin/AdminModal";
 import FormData from "../../components/admin/FormData";
@@ -13,7 +12,6 @@ export default function AdminDashboard() {
   const [selected, setSelected] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
 
- 
   const fetchProducts = async () => {
     try {
       const res = await fetch(API_URL);
@@ -43,7 +41,6 @@ export default function AdminDashboard() {
     }
   };
 
-  
   const handleAdd = async (newData) => {
     try {
       await fetch(API_URL, {
@@ -64,7 +61,6 @@ export default function AdminDashboard() {
     }
   };
 
-  
   const handleDelete = async (product) => {
     try {
       await fetch(`${API_URL}/${product.id}`, {
@@ -82,7 +78,6 @@ export default function AdminDashboard() {
     }
   };
 
-  
   const handleRestore = async (product) => {
     try {
       await fetch(`${API_URL}/${product.id}`, {
@@ -100,7 +95,6 @@ export default function AdminDashboard() {
     }
   };
 
-  
   const handleUpdateStock = async (product, newStock) => {
     try {
       await fetch(`${API_URL}/${product.id}`, {
@@ -120,8 +114,6 @@ export default function AdminDashboard() {
 
   return (
     <AdminLayout>
-      <AdminHeader />
-
       <button
         onClick={() => setIsAdd(true)}
         className="mb-6 bg-pink-500 hover:bg-pink-600
@@ -165,7 +157,6 @@ export default function AdminDashboard() {
             </div>
           ))}
       </div>
-
 
       <AdminModal
         show={!!selected}

@@ -23,7 +23,8 @@ const Navbar = () => {
     }
   }, [totalItem]);
 
-  // ✅ LOGOUT
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
@@ -44,7 +45,6 @@ const Navbar = () => {
 
         <Link to="/" className="hover:text-pink-500">Home</Link>
 
-        {/* PRODUCTS */}
         <div className="relative">
           <button
             onClick={() => setOpen(!open)}
@@ -76,7 +76,6 @@ const Navbar = () => {
 
         <Link to="/contact" className="hover:text-pink-500">Contact</Link>
 
-        {/* CART */}
         <Link to="/cart" className="relative text-2xl">
           🛒
           {totalItem > 0 && (
@@ -94,13 +93,21 @@ const Navbar = () => {
           )}
         </Link>
 
-        {/* LOGOUT */}
-        <button
-          onClick={handleLogout}
-          className="text-red-500 hover:underline text-sm"
-        >
-          Logout
-        </button>
+        {user && (
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-gray-600">
+              Hi, <b>{user.username}</b>
+            </span>
+
+            <button
+              onClick={handleLogout}
+              className="text-red-500 hover:underline text-sm"
+            >
+              Logout
+            </button>
+          </div>
+        )}
+
       </div>
     </nav>
   );
