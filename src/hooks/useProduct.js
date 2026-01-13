@@ -14,7 +14,9 @@ export default function useProduct() {
         const res = await fetch(API_URL);
         const data = await res.json();
 
-        setProducts(data.filter((p) => !p.isDeleted));
+        setProducts(
+          data.filter((p) => !p.isDeleted)
+        );
       } catch (err) {
         setError("Gagal memuat produk");
       } finally {
@@ -27,3 +29,4 @@ export default function useProduct() {
 
   return { products, loading, error };
 }
+

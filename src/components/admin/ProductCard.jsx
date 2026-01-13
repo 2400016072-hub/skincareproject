@@ -6,7 +6,7 @@ export default function ProductCard({
   onDelete,
   onUpdateStock,
 }) {
-  const stock = Number(product.stock) || 0;
+  const stock = Number(product.stok) || 0;
 
   return (
     <motion.div

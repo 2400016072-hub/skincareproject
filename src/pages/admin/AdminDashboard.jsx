@@ -26,20 +26,24 @@ export default function AdminDashboard() {
     fetchProducts();
   }, []);
 
-  const handleSave = async (updatedData) => {
+  const handleSave = async (updatedProduct) => {
     try {
-      await fetch(`${API_URL}/${selected.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedData),
-      });
+    await fetch(`${API_URL}/${selected.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...selected,      // ⬅️ PENTING
+        ...updatedData,   // data form
+        stock: selected.stock ?? 0, // ⬅️ JANGAN HILANG
+      }),
+    });
 
-      setSelected(null);
-      fetchProducts();
-    } catch (err) {
-      console.error("Gagal update produk", err);
-    }
-  };
+    setSelected(null);
+    fetchProducts();
+  } catch (err) {
+    console.error("Gagal update produk", err);
+  }
+};
 
   const handleAdd = async (newData) => {
     try {

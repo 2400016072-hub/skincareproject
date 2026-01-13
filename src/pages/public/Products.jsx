@@ -11,15 +11,23 @@ const categories = [
 
 export default function Products() {
   const [searchParams] = useSearchParams();
+
   const category = searchParams.get("category");
+  const brand = searchParams.get("brand");
 
   const { products, loading, error } = useProduct();
 
   let filteredProducts = products;
 
+  if (brand) {
+    filteredProducts = filteredProducts.filter(
+      (p) => p.brand?.toLowerCase() === brand.toLowerCase()
+    );
+  }
+
   if (category) {
     filteredProducts = filteredProducts.filter(
-      (product) => product.category === category
+      (p) => p.category?.toLowerCase() === category.toLowerCase()
     );
   }
 
@@ -35,16 +43,8 @@ export default function Products() {
           {categories.map((cat) => (
             <Link
               key={cat.value}
-              to={`/products?category=${cat.value}`}
-              className={`
-                px-5 py-2 rounded-full text-sm font-medium
-                transition-all duration-300
-                ${
-                  category === cat.value
-                    ? "bg-pink-500 text-white shadow-lg scale-105"
-                    : "bg-pink-100 text-pink-600 hover:bg-pink-200 hover:scale-105"
-                }
-              `}
+              to={`/products?brand=${brand || ""}&category=${cat.value}`}
+              className="px-5 py-2 rounded-full bg-pink-100 text-pink-600"
             >
               {cat.label}
             </Link>
