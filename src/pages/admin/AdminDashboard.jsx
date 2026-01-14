@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AdminLayout from "../../components/admin/AdminLayout";
 import ProductCard from "../../components/admin/ProductCard";
 import AdminModal from "../../components/admin/AdminModal";
@@ -8,6 +9,8 @@ const API_URL =
   "https://6958bce26c3282d9f1d5ab1d.mockapi.io/skincare/database/v1/product";
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
+
   const [products, setProducts] = useState([]);
   const [selected, setSelected] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
@@ -26,24 +29,25 @@ export default function AdminDashboard() {
     fetchProducts();
   }, []);
 
+  // ✅ FIXED HANDLE SAVE
   const handleSave = async (updatedProduct) => {
     try {
-    await fetch(`${API_URL}/${selected.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...selected,      // ⬅️ PENTING
-        ...updatedData,   // data form
-        stock: selected.stock ?? 0, // ⬅️ JANGAN HILANG
-      }),
-    });
+      await fetch(`${API_URL}/${selected.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...selected,
+          ...updatedProduct,
+          stock: Number(updatedProduct.stock) ?? selected.stock ?? 0,
+        }),
+      });
 
-    setSelected(null);
-    fetchProducts();
-  } catch (err) {
-    console.error("Gagal update produk", err);
-  }
-};
+      setSelected(null);
+      fetchProducts();
+    } catch (err) {
+      console.error("Gagal update produk", err);
+    }
+  };
 
   const handleAdd = async (newData) => {
     try {
@@ -118,6 +122,16 @@ export default function AdminDashboard() {
 
   return (
     <AdminLayout>
+      {/* 🔙 TOMBOL KEMBALI */}
+      <button
+        onClick={() => navigate(-1)}
+        className="mb-4 bg-gray-200 hover:bg-gray-300
+        text-gray-700 px-4 py-2 rounded-xl font-medium"
+      >
+        ← Kembali
+      </button>
+
+      {/* ➕ TAMBAH PRODUK */}
       <button
         onClick={() => setIsAdd(true)}
         className="mb-6 bg-pink-500 hover:bg-pink-600
