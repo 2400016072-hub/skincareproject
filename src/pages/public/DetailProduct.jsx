@@ -13,18 +13,18 @@ export default function DetailProduct() {
     return <p className="p-8">Loading...</p>;
   }
 
-  const product = products.find(
-    (item) => String(item.id) === id
-  );
+  // Pastikan ID tipe datanya sama (string vs number)
+  const product = products.find((item) => String(item.id) === String(id));
 
   if (!product) {
     return <p className="p-8">Produk tidak ditemukan</p>;
   }
 
-  const stok = Number(product.stok);
+  // Ganti 'product.stok' jadi 'product.stock' sesuai data dari Admin/API
+  const stockCount = product.stock ? Number(product.stock) : 0;
 
   const handleAddToCart = () => {
-    if (stok === 0) return;
+    if (stockCount === 0) return;
 
     addToCart(product);
     setAdded(true);
@@ -41,29 +41,26 @@ export default function DetailProduct() {
           className="w-80 rounded-xl"
         />
 
-        <h1 className="text-3xl font-bold mt-6">
-          {product.name}
-        </h1>
+        <h1 className="text-3xl font-bold mt-6">{product.name}</h1>
 
-        <p className="text-xl text-pink-600">
-          Rp {product.price}
-        </p>
+        <p className="text-xl text-pink-600">Rp {product.price}</p>
 
-        <p className="mt-2 text-sm">
-          Stok: {stok}
-        </p>
+        {/* TAMPILKAN STOK */}
+        <p className="mt-2 text-sm">Stok: {stockCount}</p>
 
         <button
           onClick={handleAddToCart}
-          disabled={stok === 0}
+          disabled={stockCount === 0}
           className={`
             mt-6 px-6 py-2 rounded-xl text-white
-            ${stok === 0
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-pink-500 hover:scale-105"}
+            ${
+              stockCount === 0
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-pink-500 hover:scale-105"
+            }
           `}
         >
-          {stok === 0 ? "Stok Habis" : "+ Keranjang"}
+          {stockCount === 0 ? "Stok Habis" : "+ Keranjang"}
         </button>
       </div>
     </div>

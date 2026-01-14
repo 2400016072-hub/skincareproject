@@ -6,7 +6,7 @@ export default function ProductCard({
   onDelete,
   onUpdateStock,
 }) {
-  const stock = Number(product.stok) || 0;
+  const stock = product.stock ? Number(product.stock) : 0;
 
   return (
     <motion.div
@@ -20,6 +20,7 @@ export default function ProductCard({
       <h3 className="font-semibold text-pink-700 text-lg">{product.name}</h3>
       <p className="text-pink-500">Rp {product.price}</p>
 
+      {/* Tampilan Stok */}
       <p
         className={`text-sm mb-3 ${
           stock === 0 ? "text-red-500" : "text-gray-600"
@@ -28,15 +29,14 @@ export default function ProductCard({
         Stok: {stock}
       </p>
 
-      
+      {/* Tombol Update Stok (TETAP ADA) */}
       <div className="flex gap-2 mb-4">
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.9 }}
           transition={{ type: "spring", stiffness: 300 }}
           onClick={() => onUpdateStock(product, stock + 1)}
-          className="flex-1 bg-green-500 hover:bg-green-600
-          text-white rounded py-1"
+          className="flex-1 bg-green-500 hover:bg-green-600 text-white rounded py-1"
         >
           + Stok
         </motion.button>
@@ -57,14 +57,14 @@ export default function ProductCard({
         </motion.button>
       </div>
 
+      {/* Tombol Edit & Hapus (TETAP ADA) */}
       <div className="flex gap-2">
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.9 }}
           transition={{ type: "spring", stiffness: 300 }}
           onClick={onEdit}
-          className="flex-1 bg-pink-400 hover:bg-pink-500
-          text-white rounded py-2"
+          className="flex-1 bg-pink-400 hover:bg-pink-500 text-white rounded py-2"
         >
           Edit
         </motion.button>
@@ -74,8 +74,7 @@ export default function ProductCard({
           whileTap={{ scale: 0.9 }}
           transition={{ type: "spring", stiffness: 300 }}
           onClick={onDelete}
-          className="flex-1 bg-pink-600 hover:bg-pink-700
-          text-white rounded py-2"
+          className="flex-1 bg-pink-600 hover:bg-pink-700 text-white rounded py-2"
         >
           Hapus
         </motion.button>

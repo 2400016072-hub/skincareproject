@@ -8,10 +8,7 @@ const Navbar = () => {
   const { cart } = useCart();
   const navigate = useNavigate();
 
-  const totalItem = (cart || []).reduce(
-    (total, item) => total + item.qty,
-    0
-  );
+  const totalItem = (cart || []).reduce((total, item) => total + item.qty, 0);
 
   const [animate, setAnimate] = useState(false);
 
@@ -32,7 +29,6 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-between items-center px-8 py-4 bg-white border-b border-gray-100 sticky top-0 z-50">
-      
       <Link to="/" className="flex items-center">
         <img
           src={Logo}
@@ -42,8 +38,9 @@ const Navbar = () => {
       </Link>
 
       <div className="flex gap-6 items-center">
-
-        <Link to="/" className="hover:text-pink-500">Home</Link>
+        <Link to="/" className="hover:text-pink-500">
+          Home
+        </Link>
 
         <div className="relative">
           <button
@@ -56,7 +53,7 @@ const Navbar = () => {
           {open && (
             <div className="absolute top-10 left-1/2 -translate-x-1/2 bg-white rounded-xl shadow p-3 w-52 z-50">
               {[
-                ["facial-wash", "Facial Wash"],
+                ["facial wash", "Facial Wash"],
                 ["serum", "Serum"],
                 ["moisturizer", "Moisturizer"],
                 ["sunscreen", "Sunscreen"],
@@ -74,7 +71,9 @@ const Navbar = () => {
           )}
         </div>
 
-        <Link to="/contact" className="hover:text-pink-500">Contact</Link>
+        <Link to="/contact" className="hover:text-pink-500">
+          Contact
+        </Link>
 
         <Link to="/cart" className="relative text-2xl">
           🛒
@@ -107,7 +106,6 @@ const Navbar = () => {
             </button>
           </div>
         )}
-
       </div>
     </nav>
   );
