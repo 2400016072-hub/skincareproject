@@ -5,7 +5,7 @@ export default function FormData({ defaultValue, onSave }) {
     name: "",
     category: "",
     price: "",
-    stock: "",
+    stok: 0,
   });
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function FormData({ defaultValue, onSave }) {
         name: defaultValue.name || "",
         category: defaultValue.category || "",
         price: defaultValue.price || "",
-        stock: defaultValue.stock ?? 0,
+        stok: defaultValue.stok ?? 0,
       });
     }
   }, [defaultValue]);
@@ -33,7 +33,8 @@ export default function FormData({ defaultValue, onSave }) {
       name: form.name,
       category: form.category,
       price: Number(form.price),
-      stock: Number(form.stock),
+      stok: Number(form.stok),
+      isDeleted: false,
     });
   };
 
@@ -67,11 +68,10 @@ export default function FormData({ defaultValue, onSave }) {
         required
       />
 
-      {/* ✅ INPUT STOK */}
       <input
-        name="stock"
+        name="stok"
         type="number"
-        value={form.stock}
+        value={form.stok}
         onChange={handleChange}
         placeholder="Stok Produk"
         className="w-full border p-2 rounded"
@@ -89,4 +89,3 @@ export default function FormData({ defaultValue, onSave }) {
     </form>
   );
 }
-
